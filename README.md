@@ -1,39 +1,22 @@
-# Update Mermaid 8.8.4!
+# mermaid-it
 
--   Support Mermaid 8.8.4 New Diagrams (https://mermaid-js.github.io/mermaid/#/)
--   Remove the security issues
+This package will help you integrate mermaid into the [**markdown-it**]() parser so your lovely diagrams can sit inside markdown files. This package uses Rollup to build both ES and CJS modules and states mermaid as a _peer dependency_ so that you can upgrade to the latest versions without needing an update here.
 
-# ✔Migrate v0.3.x to v0.4.x
-Change the token (like grpah TD, sequenceDiagram or something) to "mermaid"!
-```js
-- mdi.render(`\'\'\'graph TD
-+ mdi.render(`\'\'\'mermaid
-+  graph TD
-    A[Christmas] -->|Get money| B(Go shopping)
-    B --> C{Let me think}
-    C -->|One| D[Laptop]
-    C -->|Two| E[iPhone]
-    C -->|Three| F[Car]
-\`\`\``);
-```
-
-# markdown-it-mermaid
-
-Mermaid plugin for markdown-it.(Forked)
+> This wrapper/connector uses Typescript so if you do too, you can just plugin and use (not that this provides a lot of typing but some containers will complain on the import and make you do time wasting tasks)
 
 ## Installation
 
 ```
-npm install @liradb2000/markdown-it-mermaid
+npm install @inocan/mermaid-it
 ```
 
 ## Usage
 
 ```js
 import markdownIt from "markdown-it";
-import markdownItMermaid from "@liradb2000/markdown-it-mermaid";
+import Mermaid from "@inocan/mermaid-it";
 const mdi = markdownIt();
-mdi.use(markdownItMermaid);
+mdi.use(Mermaid);
 mdi.render(`~~~mermaid
   graph TD
     A[Christmas] -->|Get money| B(Go shopping)
@@ -76,25 +59,3 @@ md.use(MarkdownItMermaid,{
   ...or any options
 })
 ```
-
-## Development
-
-### Test
-
-At this time, there are no unit tests since mermaid has to run in a
-browser (uses document apis).  At some point in the future, we might go
-with a headless browser.
-
-### Distribution
-
-```
-npm version <newver> && npm publish
-```
-
-## Alternative packages
-- https://github.com/DatatracCorporation/markdown-it-mermaid
-  - (Recommend) Supports title and more rich funcs!
-
-## Thanks to 
-@DatatracCorporation
-@nojaja
