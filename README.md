@@ -14,7 +14,7 @@ npm install @inocan/mermaid-it
 
 ```js
 import markdownIt from "markdown-it";
-import Mermaid from "@inocan/mermaid-it";
+import Mermaid from "mermaid-it";
 const mdi = markdownIt();
 mdi.use(Mermaid);
 mdi.render(`~~~mermaid
@@ -38,7 +38,7 @@ but either `~~~` or ` ``` ` works.
 
 ```js
 import MarkdownIt from 'markdown-it';
-import MarkdownItKatex from '@liradb2000/markdown-it-mermaid';
+import Mermaid from 'mermaid-it';
 
 var md = MarkdownIt({
         html: false,
