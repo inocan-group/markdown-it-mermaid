@@ -1,6 +1,6 @@
 import Mermaid from "mermaid";
 import type { PluginWithOptions } from "markdown-it";
-import Murmur from "./murmurhash3_gc.js";
+import { v3 as hash } from "murmurhash";
 
 const htmlEntities = (str: string) =>
   String(str)
@@ -10,13 +10,19 @@ const htmlEntities = (str: string) =>
 
 const MermaidChart = (code: string) => {
   try {
-    var needsUniqueId = "render" + Murmur(code, 42).toString();
-    Mermaid.mermaidAPI.render(needsUniqueId, code, (sc) => {
+    var domId = "render" + hash(code, 42).toString();
+    console.log("hash", { domId, code });
+
+    Mermaid.mermaidAPI.render(domId, code, (sc) => {
+      console.log("mermaid has returned");
+
       code = sc;
     });
     return `<div class="mermaid">${code}</div>`;
   } catch (err) {
-    return `<pre>${htmlEntities(err.name)}: ${htmlEntities(err.message)}</pre>`;
+    return `<pre>[Mermaid]: ${htmlEntities(err.name)}: ${htmlEntities(
+      err.message
+    )}</pre>`;
   }
 };
 
@@ -40,15 +46,5 @@ const MermaidPlugIn: PluginWithOptions = (md, opts) => {
     return defaultRenderer(tokens, idx, opts, env, self);
   };
 };
-
-// MermaidPlugIn.default = {
-//   startOnLoad: false,
-//   securityLevel: "true",
-//   theme: "default",
-//   flowchart: {
-//     htmlLabels: false,
-//     useMaxWidth: true,
-//   },
-// };
 
 export default MermaidPlugIn;
